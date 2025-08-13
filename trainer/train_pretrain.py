@@ -175,7 +175,7 @@ if __name__ == "__main__":
         wandb = None
 
     model, tokenizer = init_model(lm_config)
-    train_ds = PretrainDataset(args.data_path, tokenizer, max_length=args.max_seq_len)
+    train_ds = PretrainDataset('/kaggle/input/minimind-dataset/pretrain_hq.jsonl', tokenizer, max_length=args.max_seq_len)
     train_sampler = DistributedSampler(train_ds) if ddp else None
     train_loader = DataLoader(
         train_ds,
