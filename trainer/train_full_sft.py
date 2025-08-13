@@ -94,7 +94,8 @@ def train_epoch(epoch, wandb):
 
 
 def init_model(lm_config):
-    tokenizer = AutoTokenizer.from_pretrained('../model')
+    model_path = '/kaggle/working/minimind/model/'
+    tokenizer = AutoTokenizer.from_pretrained(model_path)
     model = MiniMindForCausalLM(lm_config)
     moe_path = '_moe' if lm_config.use_moe else ''
     ckp = f'{args.save_dir}/pretrain_{lm_config.hidden_size}{moe_path}.pth'
@@ -178,7 +179,8 @@ if __name__ == "__main__":
 
     model, tokenizer = init_model(lm_config)
 
-    train_ds = SFTDataset(args.data_path, tokenizer, max_length=args.max_seq_len)
+    # train_ds = SFTDataset(args.data_path, tokenizer, max_length=args.max_seq_len)
+    train_ds = SFTDataset('/kaggle/input/minimind-dataset/sft_512.jsonl', tokenizer, max_length=args.max_seq_len)
     train_sampler = DistributedSampler(train_ds) if ddp else None
     train_loader = DataLoader(
         train_ds,
