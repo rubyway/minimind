@@ -17,6 +17,13 @@ from transformers import AutoTokenizer
 from model.model_minimind import MiniMindConfig, MiniMindForCausalLM
 from dataset.lm_dataset import PretrainDataset
 
+import wandb
+from kaggle_secrets import UserSecretsClient # 导入 Kaggle Secrets 客户端
+
+# 使用 Kaggle Secrets 安全登录
+user_secrets = UserSecretsClient()
+wandb_api_key = user_secrets.get_secret("WANDB_API_KEY")
+wandb.login(key=wandb_api_key)
 warnings.filterwarnings('ignore')
 
 
