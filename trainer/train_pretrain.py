@@ -166,12 +166,13 @@ if __name__ == "__main__":
         torch.manual_seed(base_seed + rank)
         # 同时设置 CUDA 的随机种子
         torch.cuda.manual_seed(base_seed + rank)
-
+    print('wandb check!!!!!!!!!!!!!!!!!!!!!')
     if args.use_wandb and (not ddp or ddp_local_rank == 0):
         import wandb
         print('wandb effective!')
         wandb.init(project=args.wandb_project, name=args.wandb_run_name)
     else:
+        print('wandb check failed!!!!!!!!!!!!!!!!!!!!!')
         wandb = None
 
     model, tokenizer = init_model(lm_config)
