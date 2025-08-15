@@ -167,6 +167,10 @@ if __name__ == "__main__":
         # 同时设置 CUDA 的随机种子
         torch.cuda.manual_seed(base_seed + rank)
     print('wandb check!!!!!!!!!!!!!!!!!!!!!')
+    print(args.use_wandb)
+    print(not ddp)
+    print(ddp_local_rank == 0)
+    print(args.use_wandb and (not ddp or ddp_local_rank == 0))
     if args.use_wandb and (not ddp or ddp_local_rank == 0):
         import wandb
         print('wandb effective!')
