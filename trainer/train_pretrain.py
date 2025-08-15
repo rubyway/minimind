@@ -169,7 +169,7 @@ if __name__ == "__main__":
 
     if args.use_wandb and (not ddp or ddp_local_rank == 0):
         import wandb
-
+        print('wandb effective!')
         wandb.init(project=args.wandb_project, name=args.wandb_run_name)
     else:
         wandb = None
